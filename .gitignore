@@ -6,6 +6,6 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
-/my.tfvars
 /.idea/
+my.tfvars
 my.tfvars
