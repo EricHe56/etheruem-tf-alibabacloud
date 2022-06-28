@@ -129,3 +129,47 @@ module "file_system" {
 
   vswitch_id          = module.vpc.vswitch_ids[0]
 }
+
+# Create log service by sls module
+module "sls" {
+  source = "terraform-alicloud-modules/sls/alicloud"
+  project_name = "ethnode-project"
+  store_name = "geth-log"
+}
+
+//sls-logtail
+module "logtail" {
+  source = "terraform-alicloud-modules/sls-logtail/alicloud"
+
+  //ecs-instance
+  create_instance = false
+
+  //sls-logtail
+  create_log_service = true
+
+  //alicloud_log_machine_group
+  log_machine_group_name        = "tf-log-ethnode-group-name"
+  log_machine_identify_type = "ip"
+  project_name                  = module.sls.this_log_project_name
+  log_machine_topic             = "tf-log-ethnode-topic"
+
+  //alicloud_logtail_config
+  config_input_type   = "file"
+  config_input_detail       = <<EOF
+                              {
+                                  "discardUnmatch": false,
+                                  "enableRawLog": true,
+                                  "fileEncoding": "gbk",
+                                  "filePattern": "ethnode.log",
+                                  "logPath": "/ethlog",
+                                  "logType": "json_log",
+                                  "maxDepth": 10,
+                                  "topicFormat": "default"
+                              }
+                              EOF
+  logstore_name       = module.sls.this_log_store_name
+  config_name         = "tf-logtail-eth-config-name"
+  config_output_type  = "LogService"
+
+  existing_instance_private_ips = module.ecs.this_private_ip
+}

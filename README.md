@@ -1,7 +1,11 @@
 # Terraform Script of Etheruem Resource for Alibaba Cloud
 
-#### update secret_data with your own Etheruem account keystore in my.tfvars
-#### setting other variables you want
+update secret_data with your own Etheruem account keystore in my.tfvars
 
-#### terraform plan -var-file="my.tfvars"
-#### terraform apply -var-file="my.tfvars"
+setting other variables you want
+
+```hcl
+terraform plan -var-file="my.tfvars"
+
+terraform apply -var-file="my.tfvars"
+```
