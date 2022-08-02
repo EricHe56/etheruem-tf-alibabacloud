@@ -15,7 +15,7 @@ module "vpc" {
   vpc_name          = "eth-vpc"
   vpc_cidr          = "10.10.0.0/16"
 
-  availability_zones = ["ap-southeast-1b"]
+  availability_zones = ["eu-west-1a"]
   vswitch_cidrs      = ["10.10.1.0/24"]
 
   vpc_tags = {
