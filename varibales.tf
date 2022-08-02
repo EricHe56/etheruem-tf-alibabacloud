@@ -23,7 +23,7 @@ variable "ram_role_description" {
 variable "instance_type" {
   description = "ECS Instance type."
   type        = string
-  default     = "ecs.g7.6xlarge"
+  default     = "ecs.c5.xlarge "
 }
 
 variable "ecs_instance_name" {
