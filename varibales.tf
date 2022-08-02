@@ -5,7 +5,7 @@ variable "profile" {
 }
 
 variable "region" {
-  default = "ap-southeast-1"
+  default = "eu-west-1"
 }
 
 variable "ram_role_name" {
